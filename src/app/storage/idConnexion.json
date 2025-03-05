@@ -1,0 +1,15 @@
+{
+    "classe1": {
+      "login": "classe1",
+      "motDePasse": "mbp1"
+    },
+    "classe2": {
+      "login": "classe2",
+      "motDePasse": "mbp2"
+    },
+    "classe3": {
+      "login": "classe3",
+      "motDePasse": "mbp3"
+    }
+  }
+  
