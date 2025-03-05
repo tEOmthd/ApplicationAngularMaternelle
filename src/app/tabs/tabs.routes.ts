@@ -1,7 +1,12 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { LoginPage } from '../login/login.page'; // Import de la page de connexion
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginPage, 
+  },
   {
     path: 'tabs',
     component: TabsPage,
@@ -30,7 +35,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/login', // Rediriger vers la connexion d'abord
     pathMatch: 'full',
   },
 ];
