@@ -18,7 +18,16 @@
         <ion-label position="floating">Mot de passe</ion-label>
         <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
+      
+      <ion-item lines="none">
+        <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
+        <ion-label class="ion-padding-start">Se souvenir de moi</ion-label>
+      </ion-item>
+
+      <!-- Affichage du message d'erreur -->
+      <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
+
       <ion-button expand="full" (click)="login()">Se connecter</ion-button>
-    </ion-card-content> 
+    </ion-card-content>
   </ion-card>
 </ion-content>
