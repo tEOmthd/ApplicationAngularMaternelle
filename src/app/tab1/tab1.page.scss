@@ -1,0 +1,270 @@
+/* Global styles */
+ion-header {
+    --background: #1a2654; /* Bleu nuit profond */
+    --color: #f8d56b; /* Or étoilé */
+  }
+  
+  ion-toolbar {
+    --background: #1a2654;
+    border-bottom: 1px solid rgba(248, 213, 107, 0.3);
+  }
+  
+  ion-title {
+    font-family: 'Garamond', serif;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Bouton de déconnexion */
+  ion-buttons ion-button {
+    --color: #f8d56b;
+    font-family: 'Garamond', serif;
+    letter-spacing: 1px;
+  }
+  
+  /* Fond étoilé */
+  ion-content {
+    --background: linear-gradient(135deg, #0a1229 0%, #1a2654 50%, #2c3e7b 100%); /* Dégradé de ciel nocturne */
+    position: relative;
+  }
+  
+  ion-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 40px 70px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 80px 160px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 120px 40px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(2px 2px at 160px 120px, #f8d56b, rgba(248, 213, 107, 0)),
+      radial-gradient(2px 2px at 200px 220px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 240px 180px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 280px 40px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(2px 2px at 320px 100px, #f8d56b, rgba(248, 213, 107, 0));
+    background-repeat: repeat;
+    background-size: 350px 350px;
+    opacity: 0.5;
+    z-index: 0;
+    animation: twinkle 8s infinite alternate;
+  }
+  
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    25% { opacity: 0.4; }
+    50% { opacity: 0.5; }
+    75% { opacity: 0.4; }
+    100% { opacity: 0.3; }
+  }
+  
+  /* En-tête de bienvenue */
+  h2 {
+    color: #f8d56b;
+    font-family: 'Garamond', serif;
+    font-weight: normal;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #ffffff;
+    font-family: 'Garamond', serif;
+    position: relative;
+  }
+  
+  /* Message pas d'articles */
+  .ion-text-center p {
+    color: #f8d56b;
+    font-style: italic;
+    opacity: 0.8;
+    padding: 30px 0;
+  }
+  
+  /* Cartes d'articles */
+  .article-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    margin: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(248, 213, 107, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  
+  .article-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231a2654" opacity="0.1" d="M17,21L14.25,18L15.41,16.84L17,18.43L20.59,14.84L21.75,16.25M12.8,21H5C3.89,21 3,20.11 3,19V5C3,3.89 3.89,3 5,3H19C20.11,3 21,3.89 21,5V12.8C20.39,12.45 19.72,12.2 19,12.08V5H5V19H12.08C12.2,19.72 12.45,20.39 12.8,21M12,17.5L6.5,12H10V10H14V12H17.5L12,17.5Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+  }
+  
+  .article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* En-tête de carte */
+  ion-card-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(26, 38, 84, 0.1);
+  }
+  
+  ion-card-title {
+    font-family: 'Garamond', serif;
+    font-size: 18px;
+    color: #1a2654;
+    display: flex;
+    align-items: center;
+  }
+  
+  ion-card-title ion-icon {
+    margin-right: 6px;
+    font-size: 20px;
+  }
+  
+  /* Contenu de carte */
+  ion-card-content {
+    padding: 12px;
+  }
+  
+  /* Métadonnées d'article */
+  .article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  ion-chip {
+    --background: rgba(26, 38, 84, 0.08);
+    --color: #1a2654;
+    border: 1px solid rgba(26, 38, 84, 0.2);
+    font-family: 'Garamond', serif;
+    height: 24px;
+  }
+  
+  ion-chip ion-icon {
+    color: #1a2654;
+  }
+  
+  .date {
+    color: #555;
+    font-size: 14px;
+    font-style: italic;
+  }
+  
+  /* Aperçu de l'article */
+  .article-preview {
+    color: #333;
+    line-height: 1.4;
+    margin: 10px 0;
+    font-size: 15px;
+  }
+  
+  /* Indicateur de photo */
+  .photo-indicator {
+    display: flex;
+    align-items: center;
+    color: #777;
+    font-size: 14px;
+  }
+  
+  .photo-indicator ion-icon {
+    margin-right: 4px;
+    color: #1a2654;
+    opacity: 0.7;
+  }
+  
+  /* Rafraîchissement */
+  ion-refresher {
+    z-index: 1;
+  }
+  
+  ion-refresher-content {
+    --color: #f8d56b;
+  }
+  
+  /* Animation pour accentuer les articles importants */
+  @keyframes gentle-pulse {
+    0% { box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 6px 15px rgba(232, 90, 113, 0.4); }
+    100% { box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); }
+  }
+  
+  .article-card ion-card-title ion-icon[name="alert-circle-outline"] + .article-card {
+    animation: gentle-pulse 2s infinite;
+    border-left: 3px solid #e85a71;
+  }
+  
+  /* Petit Prince Touch - Silhouette et étoile */
+  .ion-padding::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23f8d56b" opacity="0.5" d="M12,19.26L6.37,22.1L7.24,15.93L3.13,11.29L9.27,10.15L12,4.54L14.73,10.15L20.87,11.29L16.76,15.93L17.63,22.1L12,19.26Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+    animation: gentle-float 4s infinite alternate ease-in-out;
+  }
+  
+  @keyframes gentle-float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-10px) rotate(5deg); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .article-card {
+      margin: 12px 10px;
+    }
+    
+    ion-card-title {
+      font-size: 16px;
+    }
+    
+    .article-preview {
+      font-size: 14px;
+    }
+  }
+  
+  /* Animation pour les nouvelles entrées (à appliquer aux nouveaux articles) */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .new-article {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  /* Personnalisation spécifique au Petit Prince - Élément décoratif */
+  ion-list::after {
+    content: "";
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231a2654" opacity="0.2" d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+  }

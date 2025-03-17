@@ -1,11 +1,14 @@
+import { Article, Galerie, Dates } from '../models'; // Assurez-vous que le chemin est correct
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader,
-  IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonText,
-  IonCheckbox, ToastController, AlertController, LoadingController
+  ToastController,
+  AlertController,
+  LoadingController,
 } from '@ionic/angular/standalone';
+
+import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { LogdataService } from '../logdata.service';
 import { CommonModule } from '@angular/common';
@@ -16,11 +19,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-    IonHeader, IonToolbar, IonTitle, IonContent, IonCard,
-    IonCardHeader, IonCardTitle, IonCardContent, IonItem,
-    IonLabel, IonInput, IonButton, FormsModule, IonText,
-    IonCheckbox, CommonModule, HttpClientModule
-  ]
+    IonicModule,
+    FormsModule,
+    HttpClientModule,
+    CommonModule,
+  ],
+  
 })
 export class LoginPage implements OnInit {
   public username: string = '';
@@ -77,41 +81,43 @@ export class LoginPage implements OnInit {
       this.presentToast('Veuillez entrer un identifiant et un mot de passe.');
       return;
     }
-  
+
     // Afficher un indicateur de chargement
     const loading = await this.loadingController.create({
       message: 'Connexion en cours...',
-      spinner: 'circular'
+      spinner: 'circular',
     });
     await loading.present();
-  
+
     const url = `https://sebastien-thon.fr/prince/index.php?connexion&login=${this.username}&mdp=${this.password}`;
-    console.log('Tentative de connexion à l\'URL:', url);
-    
+    console.log("Tentative de connexion à l'URL:", url);
+
     this.http.get(url).subscribe({
       next: (response: any) => {
-        console.log('Réponse de l\'API de connexion:', response);
-        if (response.resultat === "OK") {
+        console.log("Réponse de l'API de connexion:", response);
+        if (response.resultat === 'OK') {
           console.log('Connexion réussie, sauvegarde des identifiants');
           this.saveCredentials();
           this.logdataService.login = this.username;
-          this.logdataService.mdp = this.password;
-  
+
+
           // Récupérer les données de l'école
           this.fetchSchoolData();
-        } else if (response.erreur === "Login ou mot de passe incorrect") {
+        } else if (response.erreur === 'Login ou mot de passe incorrect') {
           console.log('Échec de connexion: login ou mot de passe incorrect');
           loading.dismiss();
-          
+
           this.errorMessage = response.erreur;
-  
+
           // Afficher une alerte et un toast
           this.presentAlert('Erreur de connexion', response.erreur);
           this.presentToast(response.erreur);
-        }
-        else {
-          console.log('Réponse inattendue de l\'API:', response);
-          this.presentAlert('Réponse inattendue', 'Format de réponse de l\'API non reconnu');
+        } else {
+          console.log("Réponse inattendue de l'API:", response);
+          this.presentAlert(
+            'Réponse inattendue',
+            "Format de réponse de l'API non reconnu"
+          );
           loading.dismiss();
         }
       },
@@ -119,59 +125,111 @@ export class LoginPage implements OnInit {
         console.error('Erreur HTTP détaillée:', error);
         loading.dismiss();
         this.errorMessage = 'Erreur de connexion au serveur.';
-        this.presentAlert('Erreur de serveur', 'Impossible de se connecter au serveur.');
+        this.presentAlert(
+          'Erreur de serveur',
+          'Impossible de se connecter au serveur.'
+        );
         this.presentToast('Erreur de connexion au serveur.');
-      }
+      },
     });
   }
 
- // Méthode pour récupérer les données de l'école
-fetchSchoolData() {
-  const dataUrl = `https://sebastien-thon.fr/prince/index.php?login=${this.username}&mdp=${this.password}`;
-  console.log('Récupération des données de l\'école à l\'URL:', dataUrl);
-
-  this.http.get(dataUrl).subscribe({
-    next: (data: any) => {
-      console.log('Données de l\'école reçues:', data);
-      if (data.erreur) {
-        console.log('Erreur dans les données de l\'école:', data.erreur);
-        this.presentAlert('Erreur', data.erreur);
-        this.presentToast(data.erreur);
-      } else {
-        console.log('Données valides, stockage et redirection');
-        // Stocker les données dans le service
-        this.logdataService.schoolData = data;
-
-        // Déterminer la classe à partir du login
-        this.logdataService.className = this.getClassName(this.username);
-        console.log('Classe identifiée:', this.logdataService.className);
-
-        // Marquer l'utilisateur comme connecté
-        this.logdataService.isLoggedIn = true;
-
-        // Rediriger vers le premier onglet
-        this.router.navigate(['/tabs/tab1']);
-      }
-
-      // Fermer l'indicateur de chargement
-      this.loadingController.dismiss();
-    },
-    error: (error) => {
-      console.error('Erreur détaillée lors de la récupération des données:', error);
-      this.presentAlert('Erreur', 'Impossible de récupérer les données de l\'école.');
-      this.presentToast('Erreur lors de la récupération des données.');
-      this.loadingController.dismiss();
-    }
-  });
-}
+  // Méthode pour récupérer les données de l'école
+  fetchSchoolData() {
+    const dataUrl = `https://sebastien-thon.fr/prince/index.php?login=${this.username}&mdp=${this.password}`;
+    console.log("Récupération des données de l'école à l'URL:", dataUrl);
+  
+    this.http.get(dataUrl).subscribe({
+      next: (data: any) => {
+        console.log("Données de l'école reçues:", data);
+        if (data.erreur) {
+          console.log("Erreur dans les données de l'école:", data.erreur);
+          this.presentAlert('Erreur', data.erreur);
+          this.presentToast(data.erreur);
+        } else {
+          console.log('Données valides, stockage et redirection');
+  
+          // Instancier les articles
+          const articles: Article[] = data.articles.map((articleData: any) => 
+            new Article(
+              articleData.id,
+              articleData.titre,
+              new Date(articleData.date),
+              articleData.categorie,
+              articleData.important,
+              articleData.classe,
+              articleData.texte,
+              articleData.photos
+            )
+          );
+  
+          // Instancier les galeries
+          const galeries: Galerie[] = data.galeries.map((galerieData: any) =>
+            new Galerie(
+              galerieData.titre,
+              new Date(galerieData.date),
+              galerieData.classe,
+              galerieData.texte,
+              galerieData.photos
+            )
+          );
+  
+          // Instancier les dates
+          const dates: Dates[] = data.dates.map((dateData: any) =>
+            new Dates(
+              dateData.titre,
+              new Date(dateData.date),
+              dateData.classe,
+              dateData.texte
+            )
+          );
+  
+          // Stocker les données dans le service
+          this.logdataService.schoolData[0] = articles;
+          this.logdataService.schoolData[1] = galeries;
+          this.logdataService.schoolData[2] = dates;
+          
+          
+          // Déterminer la classe à partir du login
+          this.logdataService.className = this.getClassName(this.username);
+          console.log('Classe identifiée:', this.logdataService.className);
+  
+          // Marquer l'utilisateur comme connecté
+          this.logdataService.isLoggedIn = true;
+  
+          // Rediriger vers le premier onglet
+          this.router.navigate(['/tabs/tab1']);
+        }
+  
+        // Fermer l'indicateur de chargement
+        this.loadingController.dismiss();
+      },
+      error: (error) => {
+        console.error(
+          'Erreur détaillée lors de la récupération des données:',
+          error
+        );
+        this.presentAlert(
+          'Erreur',
+          "Impossible de récupérer les données de l'école."
+        );
+        this.presentToast('Erreur lors de la récupération des données.');
+        this.loadingController.dismiss();
+      },
+    });
+  }
 
   // Méthode pour déterminer la classe à partir du login
   getClassName(login: string): string {
     switch (login) {
-      case 'classe1': return 'Classe N°1';
-      case 'classe2': return 'Classe N°2';
-      case 'classe3': return 'Classe N°3';
-      default: return '';
+      case 'classe1':
+        return 'Classe N°1';
+      case 'classe2':
+        return 'Classe N°2';
+      case 'classe3':
+        return 'Classe N°3';
+      default:
+        return '';
     }
   }
 
@@ -181,7 +239,7 @@ fetchSchoolData() {
       message: message,
       duration: 2000,
       position: 'bottom',
-      color: 'danger'
+      color: 'danger',
     });
     toast.present();
   }
@@ -191,7 +249,7 @@ fetchSchoolData() {
     const alert = await this.alertController.create({
       header: header,
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
 
     await alert.present();

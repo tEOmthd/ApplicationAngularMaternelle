@@ -1,33 +1,73 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Connexion</ion-title>
+    <ion-title>Le Petit Prince</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Animated starry sky -->
+  <div class="stars-container"></div>
+  
+  <!-- Main card -->
   <ion-card>
+    <!-- Little Prince silhouette -->
+    <div class="little-prince-avatar"></div>
+    
     <ion-card-header>
-      <ion-card-title>Bienvenue</ion-card-title>
+      <ion-card-title>Bienvenue, Voyageur</ion-card-title>
+      <!-- Replaced ion-card-subtitle with a div -->
+      <div class="card-subtitle">Apprivoise-moi...</div>
     </ion-card-header>
+    
     <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Utilisateur</ion-label>
+      <!-- Quote from Le Petit Prince -->
+      <div class="quote-box">
+        <p class="quote">"On ne voit bien qu'avec le cœur. L'essentiel est invisible pour les yeux."</p>
+      </div>
+      
+      <!-- Form -->
+      <ion-item lines="inset" class="custom-input">
+        <ion-label position="floating">Nom du Voyageur</ion-label>
         <ion-input [(ngModel)]="username"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Mot de passe</ion-label>
+      
+      <ion-item lines="inset" class="custom-input">
+        <ion-label position="floating">Mot Secret</ion-label>
         <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
       
-      <ion-item lines="none">
+      <!-- Remember me checkbox -->
+      <ion-item lines="none" class="remember-me">
         <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
         <ion-label class="ion-padding-start">Se souvenir de moi</ion-label>
       </ion-item>
-
-      <!-- Affichage du message d'erreur -->
+      
+      <!-- Error message -->
       <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
-
-      <ion-button expand="full" (click)="login()">Se connecter</ion-button>
+      
+      <!-- Login button -->
+      <ion-button expand="full" (click)="login()" class="journey-button">
+        <ion-icon name="paper-plane" slot="start"></ion-icon>
+        Commencer le Voyage
+      </ion-button>
+      
+      <!-- New account link -->
+      <div class="new-account">
+        <a href="#">Créer un nouveau compte</a>
+      </div>
     </ion-card-content>
+    
+    <!-- Rose illustration -->
+    <div class="rose-illustration"></div>
+    
+    <!-- Fox illustration -->
+    <div class="fox-illustration"></div>
   </ion-card>
+  
+  <!-- Baobab trees -->
+  <div class="baobab-left"></div>
+  <div class="baobab-right"></div>
+  
+  <!-- Desert at bottom -->
+  <div class="desert-footer"></div>
 </ion-content>
