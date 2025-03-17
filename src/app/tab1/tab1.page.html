@@ -1,17 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Articles</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        Déconnexion
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="ion-padding">
+    <h2>Bienvenue {{ logdataService.className }}</h2>
+    <p>Voici les dernières informations :</p>
+  </div>
+
+  <div *ngIf="articles.length === 0" class="ion-padding ion-text-center">
+    <p>Aucun article disponible</p>
+  </div>
+
+  <ion-list>
+    <ion-card *ngFor="let article of articles" (click)="viewArticleDetails(article)" class="article-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon *ngIf="article.important" name="alert-circle-outline" color="danger"></ion-icon>
+          {{ article.titre }}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="article-meta">
+          <ion-chip color="tertiary" outline="true">
+            <ion-icon [name]="getIconForCategory(article.categorie)"></ion-icon>
+            <ion-label>{{ article.categorie }}</ion-label>
+          </ion-chip>
+          <span class="date">{{ formatDate(article.date) }}</span>
+        </div>
+        <p class="article-preview">{{ article.texte | slice:0:150 }}{{ article.texte.length > 150 ? '...' : '' }}</p>
+        <div *ngIf="article.photos && article.photos.length > 0" class="photo-indicator">
+          <ion-icon name="images-outline"></ion-icon>
+          <small>{{ article.photos.length }} photo(s)</small>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

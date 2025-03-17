@@ -71,49 +71,53 @@ export class LoginPage implements OnInit {
       localStorage.removeItem('rememberMe');
     }
   }
-
-  // Méthode pour gérer la connexion
   async login() {
     if (!this.username || !this.password) {
       this.errorMessage = 'Veuillez entrer un identifiant et un mot de passe.';
       this.presentToast('Veuillez entrer un identifiant et un mot de passe.');
       return;
     }
-
+  
     // Afficher un indicateur de chargement
     const loading = await this.loadingController.create({
       message: 'Connexion en cours...',
       spinner: 'circular'
     });
     await loading.present();
-
+  
     const url = `https://sebastien-thon.fr/prince/index.php?connexion&login=${this.username}&mdp=${this.password}`;
+    console.log('Tentative de connexion à l\'URL:', url);
     
     this.http.get(url).subscribe({
       next: (response: any) => {
+        console.log('Réponse de l\'API de connexion:', response);
         if (response.resultat === "OK") {
-          // Sauvegarder les identifiants si "se souvenir de moi" est coché
+          console.log('Connexion réussie, sauvegarde des identifiants');
           this.saveCredentials();
-
-          // Sauvegarder les informations de connexion dans le service
           this.logdataService.login = this.username;
           this.logdataService.mdp = this.password;
-
+  
           // Récupérer les données de l'école
           this.fetchSchoolData();
-        } else if (response.erreur) {
+        } else if (response.erreur === "Login ou mot de passe incorrect") {
+          console.log('Échec de connexion: login ou mot de passe incorrect');
           loading.dismiss();
-          // Afficher le message d'erreur dans l'interface
+          
           this.errorMessage = response.erreur;
-
+  
           // Afficher une alerte et un toast
           this.presentAlert('Erreur de connexion', response.erreur);
           this.presentToast(response.erreur);
         }
+        else {
+          console.log('Réponse inattendue de l\'API:', response);
+          this.presentAlert('Réponse inattendue', 'Format de réponse de l\'API non reconnu');
+          loading.dismiss();
+        }
       },
       error: (error) => {
+        console.error('Erreur HTTP détaillée:', error);
         loading.dismiss();
-        console.error('Erreur HTTP:', error);
         this.errorMessage = 'Erreur de connexion au serveur.';
         this.presentAlert('Erreur de serveur', 'Impossible de se connecter au serveur.');
         this.presentToast('Erreur de connexion au serveur.');
@@ -121,40 +125,45 @@ export class LoginPage implements OnInit {
     });
   }
 
-  // Méthode pour récupérer les données de l'école
-  fetchSchoolData() {
-    const dataUrl = `https://sebastien-thon.fr/prince/index.php?login=${this.username}&mdp=${this.password}`;
+ // Méthode pour récupérer les données de l'école
+fetchSchoolData() {
+  const dataUrl = `https://sebastien-thon.fr/prince/index.php?login=${this.username}&mdp=${this.password}`;
+  console.log('Récupération des données de l\'école à l\'URL:', dataUrl);
 
-    this.http.get(dataUrl).subscribe({
-      next: (data: any) => {
-        if (data.erreur) {
-          this.presentAlert('Erreur', data.erreur);
-          this.presentToast(data.erreur);
-        } else {
-          // Stocker les données dans le service
-          this.logdataService.schoolData = data;
+  this.http.get(dataUrl).subscribe({
+    next: (data: any) => {
+      console.log('Données de l\'école reçues:', data);
+      if (data.erreur) {
+        console.log('Erreur dans les données de l\'école:', data.erreur);
+        this.presentAlert('Erreur', data.erreur);
+        this.presentToast(data.erreur);
+      } else {
+        console.log('Données valides, stockage et redirection');
+        // Stocker les données dans le service
+        this.logdataService.schoolData = data;
 
-          // Déterminer la classe à partir du login
-          this.logdataService.className = this.getClassName(this.username);
+        // Déterminer la classe à partir du login
+        this.logdataService.className = this.getClassName(this.username);
+        console.log('Classe identifiée:', this.logdataService.className);
 
-          // Marquer l'utilisateur comme connecté
-          this.logdataService.isLoggedIn = true;
+        // Marquer l'utilisateur comme connecté
+        this.logdataService.isLoggedIn = true;
 
-          // Rediriger vers le premier onglet
-          this.router.navigate(['/tabs/tab1']);
-        }
-
-        // Fermer l'indicateur de chargement
-        this.loadingController.dismiss();
-      },
-      error: (error) => {
-        console.error('Erreur lors de la récupération des données:', error);
-        this.presentAlert('Erreur', 'Impossible de récupérer les données de l\'école.');
-        this.presentToast('Erreur lors de la récupération des données.');
-        this.loadingController.dismiss();
+        // Rediriger vers le premier onglet
+        this.router.navigate(['/tabs/tab1']);
       }
-    });
-  }
+
+      // Fermer l'indicateur de chargement
+      this.loadingController.dismiss();
+    },
+    error: (error) => {
+      console.error('Erreur détaillée lors de la récupération des données:', error);
+      this.presentAlert('Erreur', 'Impossible de récupérer les données de l\'école.');
+      this.presentToast('Erreur lors de la récupération des données.');
+      this.loadingController.dismiss();
+    }
+  });
+}
 
   // Méthode pour déterminer la classe à partir du login
   getClassName(login: string): string {

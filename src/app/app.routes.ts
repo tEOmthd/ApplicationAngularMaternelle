@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs/tabs.page';
-import { LoginPage } from './login/login.page'; // Importez la page de connexion
 
 export const routes: Routes = [
   {
@@ -28,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then(m => m.LoginPage) // Route pour la page de connexion
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage) 
   },
   {
     path: '',
