@@ -27,7 +27,6 @@
     <ion-card *ngFor="let article of articles" (click)="viewArticleDetails(article)" class="article-card">
       <ion-card-header>
         <ion-card-title>
-          <ion-icon *ngIf="article.important" name="alert-circle-outline" color="danger"></ion-icon>
           {{ article.titre }}
         </ion-card-title>
       </ion-card-header>
@@ -47,7 +46,8 @@
         <!-- Affichage des photos -->
         <div *ngIf="article.photos && article.photos.length > 0" class="photos-container">
           <div *ngFor="let photo of article.photos" class="photo-item">
-            <img [src]="photo" alt="Photo de l'article" class="article-photo" />
+            <img *ngIf="photo.image" [src]="'https://sebastien-thon.fr/prince/images/' + photo.image" alt="Photo de l'article" class="article-photo" />
+
           </div>
         </div>
       </ion-card-content>

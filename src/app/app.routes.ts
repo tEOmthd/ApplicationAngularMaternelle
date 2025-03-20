@@ -19,6 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('./tab3/tab3.page').then(m => m.Tab3Page)
       },
       {
+        path: 'contact',
+        loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage)
+      },
+      {
         path: '',
         redirectTo: 'tab1',
         pathMatch: 'full'
@@ -27,11 +31,11 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then(m => m.LoginPage) 
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage)
   },
   {
     path: '',
-    redirectTo: 'login', // Redirige vers la page de connexion par défaut
+    redirectTo: 'login',
     pathMatch: 'full'
   }
-];
+]; // Fermeture correcte du tableau

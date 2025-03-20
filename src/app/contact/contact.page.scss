@@ -1,0 +1,209 @@
+/* Styles pour la page Contact - en harmonie avec le thème du Petit Prince */
+
+/* Reprise du style d'en-tête */
+ion-header {
+    --background: #1a2654;
+    /* Bleu nuit profond */
+    --color: #f8d56b;
+    /* Or étoilé */
+}
+
+ion-toolbar {
+    --background: #1a2654;
+    border-bottom: 1px solid rgba(248, 213, 107, 0.3);
+}
+
+ion-title {
+    font-family: 'Garamond', serif;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Fond étoilé - repris du style original */
+ion-content {
+    --background: linear-gradient(135deg, #0a1229 0%, #1a2654 50%, #2c3e7b 100%);
+    /* Dégradé de ciel nocturne */
+    position: relative;
+}
+
+ion-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 40px 70px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 80px 160px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 120px 40px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(2px 2px at 160px 120px, #f8d56b, rgba(248, 213, 107, 0)),
+        radial-gradient(2px 2px at 200px 220px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 240px 180px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(1px 1px at 280px 40px, #fff, rgba(255, 255, 255, 0)),
+        radial-gradient(2px 2px at 320px 100px, #f8d56b, rgba(248, 213, 107, 0));
+    background-repeat: repeat;
+    background-size: 350px 350px;
+    opacity: 0.5;
+    z-index: 0;
+    animation: twinkle 8s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.3;
+    }
+
+    25% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* Styles spécifiques pour la carte de contact */
+ion-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    margin: 15px auto;
+    max-width: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(248, 213, 107, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+ion-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* En-tête de carte */
+ion-card-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(26, 38, 84, 0.1);
+}
+
+ion-card-title {
+    font-family: 'Garamond', serif;
+    font-size: 20px;
+    color: #1a2654;
+    text-align: center;
+    padding: 5px 0;
+}
+
+/* Contenu de carte */
+ion-card-content {
+    padding: 16px;
+    color: #1a2654;
+    font-family: 'Garamond', serif;
+}
+
+ion-card-content p {
+    color: #333;
+    margin: 10px 0;
+    position: relative;
+    padding-left: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Style spécifique pour les liens */
+ion-card-content a {
+    color: #2c3e7b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+ion-card-content a:hover {
+    color: #f8d56b;
+    text-decoration: underline;
+}
+
+ion-card-content a:hover::after {
+    content: "★";
+    position: absolute;
+    margin-left: 5px;
+    font-size: 12px;
+    animation: twinkle-star 1.5s infinite alternate;
+}
+
+@keyframes twinkle-star {
+    0% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Élément décoratif du Petit Prince */
+ion-card::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23f8d56b" opacity="0.5" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 8.13,16.55 8.85,15.85C9.56,15.14 10.38,14.5 11.29,14.05C11.46,14.03 11.63,14 11.8,13.97C12.11,13.92 12.44,13.89 12.77,13.89C13.47,13.89 14.16,14 14.86,14.12C15.11,14.18 15.36,14.24 15.61,14.31C15.86,14.38 16.11,14.45 16.36,14.53C13.04,16.77 8.89,19.86 7.07,18.28M14.12,4.81C15.12,4.67 16.11,5.08 16.95,5.65C17.78,6.23 18.47,7 19.06,7.82C19.59,8.57 20,9.46 19.88,10.38C19.76,11.28 19.05,12.12 18.16,12.5C17.95,12.19 17.92,11.8 17.88,11.45C17.71,10.67 17.5,9.89 17.28,9.11C17.06,8.33 16.83,7.54 16.53,6.79C16.29,6.23 15.99,5.7 15.66,5.19C15.42,4.82 15,4.66 14.55,4.78C14.12,4.9 13.65,4.76 13.27,4.93C12.91,5.1 12.71,5.51 12.5,5.85C12.29,6.19 12.05,6.5 11.79,6.79C12.15,5.62 13.02,4.95 14.12,4.81Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    opacity: 0.7;
+    transform: rotate(15deg);
+}
+
+/* Ajout d'une petite silhouette du Petit Prince en bas */
+.ion-padding::after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23f8d56b" opacity="0.4" d="M12,2A9,9 0 0,0 3,11C3,14.03 4.53,16.82 7,18.47V22H9V19H11V22H13V19H15V22H17V18.46C19.47,16.81 21,14 21,11A9,9 0 0,0 12,2M8,11A2,2 0 0,1 10,13A2,2 0 0,1 8,15A2,2 0 0,1 6,13A2,2 0 0,1 8,11M16,11A2,2 0 0,1 18,13A2,2 0 0,1 16,15A2,2 0 0,1 14,13A2,2 0 0,1 16,11M12,14L13.5,17H10.5L12,14Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+    animation: gentle-float 4s infinite alternate ease-in-out;
+}
+
+@keyframes gentle-float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    ion-card {
+        margin: 12px 10px;
+    }
+
+    ion-card-title {
+        font-size: 18px;
+    }
+
+    ion-card-content p {
+        font-size: 15px;
+    }
+}

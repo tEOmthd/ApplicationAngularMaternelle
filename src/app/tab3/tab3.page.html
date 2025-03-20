@@ -1,17 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Événements</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="ion-padding">
+    <h2>Événements à venir</h2>
+  </div>
+
+  <div *ngIf="dates.length === 0" class="ion-padding ion-text-center">
+    <p>Aucun événement disponible</p>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let date of dates">
+      <ion-label>
+        <h2>{{ date.titre }}</h2>
+        <p>{{ date.texte }}</p>
+        <p class="date">{{ formatDate(date.date) }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

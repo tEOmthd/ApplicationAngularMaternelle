@@ -10,6 +10,7 @@ export class LogdataService {
   public login: string = '';
   public schoolData: [Article[], Galerie[], Dates[]] = [[], [], []];
   public selectedArticle?: any;
+  public selectedGalerie: any;
 
   constructor() {}
 

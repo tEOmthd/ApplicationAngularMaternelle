@@ -1,14 +1,41 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from "../explore-container/explore-container.component";
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { LogdataService } from '../logdata.service';
+
 @Component({
   selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent]
+  templateUrl: './tab2.page.html',
+  styleUrls: ['./tab2.page.scss'],
+  standalone: true,
+  imports: [CommonModule, IonicModule]
 })
 export class Tab2Page {
+  galeries: any[] = [];
 
-  constructor() {}
+  constructor(public logdataService: LogdataService) {
+    this.loadData();
+  }
 
+  loadData() {
+    this.galeries = this.logdataService.getGaleries();
+  }
+
+  doRefresh(event: any) {
+    this.loadData();
+    event.target.complete();
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  viewGalerieDetails(galerie: any) {
+    this.logdataService.selectedGalerie = galerie;
+  }
 }

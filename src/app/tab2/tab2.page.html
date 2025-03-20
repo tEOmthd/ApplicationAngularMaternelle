@@ -1,17 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Galeries</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="ion-padding">
+    <h2>Galeries photos</h2>
+  </div>
+
+  <div *ngIf="galeries.length === 0" class="ion-padding ion-text-center">
+    <p>Aucune galerie disponible</p>
+  </div>
+
+  <ion-list>
+    <ion-card *ngFor="let galerie of galeries" (click)="viewGalerieDetails(galerie)" class="galerie-card">
+      <ion-card-header>
+        <ion-card-title>{{ galerie.titre }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ galerie.texte }}</p>
+        <p class="date">{{ formatDate(galerie.date) }}</p>
+
+        <!-- Affichage des photos -->
+        <div *ngIf="galerie.photos.length > 0" class="photos-container">
+          <div *ngFor="let photo of galerie.photos" class="photo-item">
+            <img *ngIf="photo.image" [src]="'https://sebastien-thon.fr/prince/images/' + photo.image" alt="Photo de l'article" class="article-photo" />
+
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

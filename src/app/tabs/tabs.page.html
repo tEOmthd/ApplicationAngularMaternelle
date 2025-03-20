@@ -1,4 +1,5 @@
 <ion-tabs>
+  <!-- Conteneur des onglets -->
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1">
       <ion-icon name="triangle"></ion-icon>
@@ -14,5 +15,13 @@
       <ion-icon name="square"></ion-icon>
       <ion-label>Tab 3</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="contact">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Contact</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
+
+  <!-- Partie ESSENTIELLE ajoutée -->
+  <ion-router-outlet></ion-router-outlet>
 </ion-tabs>

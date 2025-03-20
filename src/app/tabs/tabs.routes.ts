@@ -22,15 +22,21 @@ export const routes: Routes = [
           import('../tab3/tab3.page').then((m) => m.Tab3Page),
       },
       {
+        path: 'conctact',
+        loadComponent: () =>
+          import('../contact/contact.page').then((m) => m.ContactPage),
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full',
       },
+      
     ],
   },
   {
     path: '',
-    redirectTo: '/login', // Rediriger vers la connexion d'abord
+    redirectTo: '/login',
     pathMatch: 'full',
   },
 ];

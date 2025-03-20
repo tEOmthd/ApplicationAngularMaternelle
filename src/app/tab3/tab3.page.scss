@@ -1,0 +1,233 @@
+/* Global styles - repris du style original */
+ion-header {
+    --background: #1a2654; /* Bleu nuit profond */
+    --color: #f8d56b; /* Or étoilé */
+  }
+  
+  ion-toolbar {
+    --background: #1a2654;
+    border-bottom: 1px solid rgba(248, 213, 107, 0.3);
+  }
+  
+  ion-title {
+    font-family: 'Garamond', serif;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Fond étoilé */
+  ion-content {
+    --background: linear-gradient(135deg, #0a1229 0%, #1a2654 50%, #2c3e7b 100%); /* Dégradé de ciel nocturne */
+    position: relative;
+  }
+  
+  ion-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 40px 70px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 80px 160px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 120px 40px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(2px 2px at 160px 120px, #f8d56b, rgba(248, 213, 107, 0)),
+      radial-gradient(2px 2px at 200px 220px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 240px 180px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(1px 1px at 280px 40px, #fff, rgba(255, 255, 255, 0)),
+      radial-gradient(2px 2px at 320px 100px, #f8d56b, rgba(248, 213, 107, 0));
+    background-repeat: repeat;
+    background-size: 350px 350px;
+    opacity: 0.5;
+    z-index: 0;
+    animation: twinkle 8s infinite alternate;
+  }
+  
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    25% { opacity: 0.4; }
+    50% { opacity: 0.5; }
+    75% { opacity: 0.4; }
+    100% { opacity: 0.3; }
+  }
+  
+  /* En-tête de bienvenue */
+  h2 {
+    color: #f8d56b;
+    font-family: 'Garamond', serif;
+    font-weight: normal;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #ffffff;
+    font-family: 'Garamond', serif;
+    position: relative;
+  }
+  
+  /* Message pas d'événements */
+  .ion-text-center p {
+    color: #f8d56b;
+    font-style: italic;
+    opacity: 0.8;
+    padding: 30px 0;
+  }
+  
+  /* Rafraîchissement */
+  ion-refresher {
+    z-index: 1;
+  }
+  
+  ion-refresher-content {
+    --color: #f8d56b;
+  }
+  
+  /* Style pour la liste des événements */
+  ion-list {
+    background: transparent;
+    padding: 5px 10px;
+    position: relative;
+  }
+  
+  /* Style des items de liste (événements) */
+  ion-item {
+    --background: rgba(255, 255, 255, 0.92);
+    --border-radius: 12px;
+    margin-bottom: 15px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(248, 213, 107, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  ion-item:last-child {
+    margin-bottom: 20px;
+  }
+  
+  ion-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Texte des événements */
+  ion-label h2 {
+    color: #1a2654;
+    font-family: 'Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-shadow: none;
+    letter-spacing: 1px;
+  }
+  
+  ion-label p {
+    color: #333;
+    font-family: 'Garamond', serif;
+    font-size: 15px;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  
+  /* Date de l'événement */
+  .date {
+    color: #555 !important;
+    font-size: 14px !important;
+    font-style: italic !important;
+    margin-top: 8px !important;
+  }
+  
+  /* Animation pour les nouveaux événements */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .new-date {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  /* Iconographie du Petit Prince pour les événements */
+  ion-item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f8d56b;
+    transform: translateY(-50%);
+    box-shadow: 0 0 5px rgba(248, 213, 107, 0.5);
+  }
+  
+  /* Élément décoratif */
+  ion-list::after {
+    content: "";
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231a2654" opacity="0.2" d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  /* Petit Prince Touch - Étoile */
+  .ion-padding::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23f8d56b" opacity="0.5" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 0;
+    animation: gentle-float 4s infinite alternate ease-in-out;
+  }
+  
+  @keyframes gentle-float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-10px) rotate(5deg); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    ion-item {
+      margin: 10px 5px;
+      --padding-start: 12px;
+      --padding-end: 12px;
+    }
+    
+    ion-label h2 {
+      font-size: 16px;
+    }
+    
+    ion-label p {
+      font-size: 14px;
+    }
+  }
+  
+  /* Effet de ligne du temps */
+  ion-list::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(248, 213, 107, 0), rgba(248, 213, 107, 0.8) 10%, rgba(248, 213, 107, 0.8) 90%, rgba(248, 213, 107, 0));
+    z-index: 0;
+  }
