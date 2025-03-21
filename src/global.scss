@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+/* Force l'interactivité */
+ion-app {
+    pointer-events: auto !important;
+  }
+  
+  /* Réinitialise le contenu */
+  ion-content {
+    --overflow: auto;
+    touch-action: auto !important;
+    user-select: text !important;
+  }
+  
+  /* Vérifiez l'arrière-plan */
+  ion-content::part(scroll) {
+    background: white;
+  }
+
+  

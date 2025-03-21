@@ -10,23 +10,32 @@
 </ion-header>
 
 <ion-content>
-  <!-- Ajout du refresher à une position non fixe pour éviter le blocage du scroll -->
+  <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-
   <div class="ion-padding">
     <h2>Bienvenue {{ logdataService.className }}</h2>
     <p>Voici les dernières informations :</p>
   </div>
-
-  <div *ngIf="articles.length === 0" class="ion-padding ion-text-center">
+  
+  <!-- Barre de recherche -->
+  <ion-searchbar 
+    placeholder="Rechercher des articles..." 
+    [(ngModel)]="searchTerm" 
+    (ionInput)="filterArticles()"
+    animated="true"
+    showCancelButton="focus"
+    cancelButtonText="Annuler">
+  </ion-searchbar>
+  
+  <div *ngIf="filteredArticles.length === 0" class="ion-padding ion-text-center">
     <p>Aucun article disponible</p>
   </div>
 
   <ion-list>
-    <ion-card *ngFor="let article of articles" (click)="viewArticleDetails(article)" class="article-card">
+    <ion-card *ngFor="let article of filteredArticles" (click)="viewArticleDetails(article)" class="article-card">
       <ion-card-header>
         <ion-card-title>
           {{ article.titre }}
