@@ -10,9 +10,11 @@
 </ion-header>
 
 <ion-content>
+  <!-- Ajout du refresher à une position non fixe pour éviter le blocage du scroll -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  
 
   <div class="ion-padding">
     <h2>Bienvenue {{ logdataService.className }}</h2>
@@ -47,7 +49,6 @@
         <div *ngIf="article.photos && article.photos.length > 0" class="photos-container">
           <div *ngFor="let photo of article.photos" class="photo-item">
             <img *ngIf="photo.image" [src]="'https://sebastien-thon.fr/prince/images/' + photo.image" alt="Photo de l'article" class="article-photo" />
-
           </div>
         </div>
       </ion-card-content>

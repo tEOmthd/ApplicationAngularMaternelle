@@ -50,7 +50,8 @@ export class Tab1Page {
       year: 'numeric'
     });
   }
+
   logout() {
     console.log("Déconnexion...");
-    }
+  }
 }

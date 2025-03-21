@@ -85,7 +85,7 @@ p {
   background-color: rgba(255, 255, 255, 0.92);
   margin: 15px;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(248, 213, 107, 0.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -137,7 +137,7 @@ ion-card-content {
 .photo-item {
   position: relative;
   aspect-ratio: 1/1;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(26, 38, 84, 0.1);
