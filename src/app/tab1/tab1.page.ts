@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -13,12 +14,12 @@ import { Article, Galerie, Dates } from '../models';
   imports: [CommonModule, IonicModule, FormsModule]
 })
 export class Tab1Page {
-  articles: any[] = [];
-  filteredArticles: any[] = [];
+  articles: Article[] = [];
+  filteredArticles: Article[] = [];
   className: string = '';
   searchTerm: string = '';
 
-  constructor(public logdataService: LogdataService) {
+  constructor(public logdataService: LogdataService, private router: Router) {
     this.loadData();
   }
 
@@ -47,7 +48,7 @@ export class Tab1Page {
     });
   }
 
-  viewArticleDetails(article: any) {
+  viewArticleDetails(article: Article) {
     this.logdataService.selectedArticle = article;
   }
 
@@ -70,6 +71,9 @@ export class Tab1Page {
   }
 
   logout() {
-    console.log("Déconnexion...");
+    localStorage.clear();
+    sessionStorage.clear();
+    this.logdataService.logout();
+    this.router.navigate(["/login"]);
   }
 }

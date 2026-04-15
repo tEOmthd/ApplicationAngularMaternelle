@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { LogdataService } from '../logdata.service';
+import { Dates } from '../models';
 
 @Component({
   selector: 'app-tab3',
@@ -11,7 +12,7 @@ import { LogdataService } from '../logdata.service';
   imports: [CommonModule, IonicModule]
 })
 export class Tab3Page {
-  dates: any[] = [];
+  dates: Dates[] = [];
 
   constructor(public logdataService: LogdataService) {
     this.loadData();

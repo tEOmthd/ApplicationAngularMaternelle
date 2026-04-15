@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { LogdataService } from '../logdata.service';
+import { Galerie } from '../models';
 
 @Component({
   selector: 'app-tab2',
@@ -11,7 +12,7 @@ import { LogdataService } from '../logdata.service';
   imports: [CommonModule, IonicModule]
 })
 export class Tab2Page {
-  galeries: any[] = [];
+  galeries: Galerie[] = [];
 
   constructor(public logdataService: LogdataService) {
     this.loadData();
@@ -35,7 +36,7 @@ export class Tab2Page {
     });
   }
 
-  viewGalerieDetails(galerie: any) {
+  viewGalerieDetails(galerie: Galerie) {
     this.logdataService.selectedGalerie = galerie;
   }
 }
